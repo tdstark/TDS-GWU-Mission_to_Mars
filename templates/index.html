@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mars Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class='bg-light'>
+    <nav class="navbar navbar-expand-lg navbar-light topbanner">
+        <a class="navbar-brand bg-danger text-dark p-3 mh-100 font-weight-bold" href="http://127.0.0.1:5000/">Mars Data</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:5000/scrape">Refresh<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+
+    </nav>
+    <div class="container bg-white" style="margin-top: 50px;">
+      <div class="row">
+          <div class="col-lg-7">
+              <h2 class="text-dark">Latest Mars News</h2>
+              <hr>
+              <h4 class="text-dark">{{existing_data.nasa_news.headline}}</h4>
+              <p style="line-height: 1.75;">
+                  {{existing_data.nasa_news.text}}. <a href="{{existing_data.nasa_news.url}}">More Here.</a>
+              </p>
+
+              <h2 class="text-dark">Current Weather</h2>
+              <hr>
+              <p> {{existing_data.mars_weather_tweet}}</p>
+
+              <h2 class="text-dark">Featured Mars Image</h2>
+              <hr>
+              <img src={{existing_data.jpl_image_url}} class="img-fluid"/>
+              <h2 class="text-dark">Mars Fact Table</h2>
+              <hr>
+              <table>
+                  {% for row in existing_data.space_facts_table %}
+                  <tr>
+                      <td>{{row.data_points}}</td>
+                      <td></td>
+                      <td>{{row.mars_values}}</td>
+                  </tr>
+                  {% endfor %}
+              </table>
+          </div>
+          <div class="col-lg-1 bg-light"></div>
+          <div class="col-lg-4">
+            <h2 class="text-dark">Mars Hemispheres</h2>
+            <hr>
+            <p class="thumbnail">
+                {% for mars_img in existing_data.hemisphere_image_urls%}
+                    <img src={{mars_img.img_url}} class="img-fluid"/>
+                    <div class="caption" align="center" style="font-weight: bold">
+                        <p>{{mars_img.title}} </p>
+                    </div>
+                {% endfor %}
+            </p>
+          </div>
+      </div>
+    </div>
+
+    <div class="card-footer text-center text-white bg-secondary border-top-10 border-danger" style="position: fixed; left: 0; bottom: 0; width: 100%;">
+      © Copyright Tom Stark 2020
+    </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+</body>
+</html>
